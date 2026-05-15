@@ -1,13 +1,13 @@
 import zmq
-import sys
+
+SERVER_IP = "3.227.138.6"
+PORT      = "5678"
 
 def main():
-    port = sys.argv[1] if len(sys.argv) > 1 else "12345"
-
     context = zmq.Context()
-    socket  = context.socket(zmq.REP)       # create reply socket
-    socket.bind("tcp://*:" + port)          # bind to all interfaces
-    print("Server listening on port " + port + " ...")
+    socket  = context.socket(zmq.REP)           # create reply socket
+    socket.bind("tcp://*:" + PORT)              # bind to all interfaces
+    print("Server " + SERVER_IP + " listening on port " + PORT + " ...")
 
     while True:
         message = socket.recv()             # wait for incoming message

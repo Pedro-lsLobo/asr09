@@ -1,15 +1,16 @@
 import zmq
-import sys
+
+SERVER_IP = "3.227.138.6"
+PEER_IP   = "32.197.15.158"
+PORT      = "5678"
 
 def main():
-    server_host = sys.argv[1] if len(sys.argv) > 1 else "localhost"
-    port        = sys.argv[2] if len(sys.argv) > 2 else "12345"
-    address     = "tcp://" + server_host + ":" + port
+    address = "tcp://" + SERVER_IP + ":" + PORT
 
     context = zmq.Context()
-    socket  = context.socket(zmq.REQ)       # create request socket
-    socket.connect(address)                 # connect to remote server
-    print("Connected to server at " + address)
+    socket  = context.socket(zmq.REQ)           # create request socket
+    socket.connect(address)                     # connect to remote server
+    print("Peer " + PEER_IP + " connected to server at " + address)
 
     socket.send(b"Hello world")             # send request
     message = socket.recv()                 # block until response
